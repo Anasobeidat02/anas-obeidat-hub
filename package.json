@@ -1,0 +1,11 @@
+{
+    "name": "learning-hub",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+      "dev": "cd frontEnd && npm run dev",
+      "build": "cd frontEnd && npm run build"
+    }
+  }
+  

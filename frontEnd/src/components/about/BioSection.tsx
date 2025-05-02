@@ -6,7 +6,7 @@ const BioSection = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
-          <div className="prose max-w-none">
+          <div className="prose max-w-none" dir="rtl">
             <p className="mb-4">
               مرحبًا! أنا أنس عبيدات، مطور ويب متكامل (Full Stack Developer) شغوف بإنشاء تجارب رقمية استثنائية ومشاركة معرفتي مع المجتمع العربي.
             </p>
@@ -80,7 +80,7 @@ const BioSection = () => {
               </li>
               <li className="flex justify-between">
                 <span className="text-gray-600">Experience:</span>
-                <span className="font-medium">5+ years</span>
+                <span className="font-medium">3+ years</span>
               </li>
               <li className="flex justify-between">
                 <span className="text-gray-600">Focus:</span>
