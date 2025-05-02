@@ -42,3 +42,38 @@ export interface SocialLink {
   url: string;
   icon: string;
 }
+
+export interface ProgrammingLanguage {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  icon: string;
+  color: string;
+  content: string;
+  requirements: string[];
+  useCases: string[];
+  libraries: Array<{
+    name: string;
+    description: string;
+    url: string;
+  }>;
+  createdAt: string;
+  updatedAt: string;
+  createdBy: string;
+}
+
+export interface Blog {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  author: string;
+  thumbnail: string;
+  category: string;
+  tags: string[];
+  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
