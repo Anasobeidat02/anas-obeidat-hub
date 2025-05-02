@@ -18,7 +18,7 @@ const [error, setError] = useState(null);
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('https://learinnghub-backend.onrender.com/api/admins/stats', {
+        const response = await fetch('http://localhost:5000/api/admins/stats', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

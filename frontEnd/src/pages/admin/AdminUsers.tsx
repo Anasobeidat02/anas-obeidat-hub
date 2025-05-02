@@ -84,7 +84,7 @@ const AdminUsers = () => {
         role: formData.role
       };
 
-      const response = await fetch('https://learinnghub-backend.onrender.com/api/admins', {
+      const response = await fetch('http://localhost:5000/api/admins', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ const AdminUsers = () => {
         const token = localStorage.getItem('adminToken');
         if (!token) throw new Error('No authentication token found');
 
-        const response = await fetch(`https://learinnghub-backend.onrender.com/api/admins/${id}`, {
+        const response = await fetch(`http://localhost:5000/api/admins/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
