@@ -6,3 +6,4 @@ export * from './api/comments';
 export * from './api/admin';
 export * from './api/questions';
 export * from './api/languages';
+export * from './api/blogs';

@@ -16,10 +16,13 @@ import AdminQuestions from "./pages/admin/AdminQuestions";
 import AdminVideos from "./pages/admin/AdminVideos";
 import AdminLanguages from "./pages/admin/AdminLanguages";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminBlogs from "./pages/admin/AdminBlogs";
 import RequireAuth from "./components/admin/RequireAuth";
 import Quiz from "./pages/Quiz";
 import ProgrammingLanguages from "./pages/ProgrammingLanguages";
 import LanguageDetail from "./pages/LanguageDetail";
+import Blogs from "./pages/Blogs";
+import BlogDetail from "./pages/BlogDetail";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +41,8 @@ const App = () => (
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/languages" element={<ProgrammingLanguages />} />
           <Route path="/languages/:slug" element={<LanguageDetail />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/:slug" element={<BlogDetail />} />
           <Route path="/admin-login-0382" element={<AdminLogin />} />
           
           {/* Admin routes */}
@@ -46,6 +51,7 @@ const App = () => (
             <Route path="questions" element={<AdminQuestions />} />
             <Route path="videos" element={<AdminVideos />} />
             <Route path="languages" element={<AdminLanguages />} />
+            <Route path="blogs" element={<AdminBlogs />} />
             <Route path="users" element={<AdminUsers />} />
           </Route>
           

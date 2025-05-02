@@ -17,3 +17,12 @@ export const formatTags = (tags: string[] | string | undefined): string[] => {
   }
   return [];
 };
+
+// Helper for formatting blog content
+export const formatContent = (content: string): string => {
+  if (!content) return '';
+  
+  // Replace line breaks with HTML breaks for simple rendering
+  // In a real application, you might use a markdown parser here
+  return content.replace(/\n/g, '<br/>');
+};
