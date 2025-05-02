@@ -1,0 +1,58 @@
+
+{
+  "navigation": {
+    "home": "Home",
+    "videos": "Videos",
+    "about": "About",
+    "contact": "Contact",
+    "quiz": "Quiz"
+  },
+  "home": {
+    "hero": {
+      "title": "Learn Programming in Arabic",
+      "subtitle": "Practical tutorials and real-world examples for web developers",
+      "cta": "Start Learning"
+    },
+    "featured": {
+      "videos": "Featured Videos",
+      "projects": "Featured Projects",
+      "viewAll": "View All"
+    },
+    "cta": {
+      "title": "Ready to Learn Programming in Arabic?",
+      "subtitle": "Join me on a journey to master web development with practical tutorials and real-world examples.",
+      "youtube": "Subscribe on YouTube",
+      "browseVideos": "Browse Videos",
+      "takeQuiz": "Take a Quiz"
+    }
+  },
+  "quiz": {
+    "title": "Programming Quiz",
+    "description": "Test your programming knowledge with our multiple-choice questions.",
+    "selectLanguage": "Select Programming Language",
+    "chooseLanguage": "Choose a language",
+    "questionCount": "Number of Questions",
+    "chooseNumber": "Choose a number",
+    "startQuiz": "Start Quiz",
+    "question": "Question",
+    "of": "of",
+    "restartQuiz": "Restart Quiz",
+    "nextQuestion": "Next Question",
+    "finishQuiz": "Finish Quiz",
+    "noQuestions": "No questions available",
+    "noQuestionsDesc": "There are no {{language}} questions available currently.",
+    "limitedQuestions": "Only {{count}} {{language}} questions are available. Starting quiz with available questions."
+  },
+  "footer": {
+    "bio": "Full Stack Developer and Educator focused on creating engaging programming content for the Arabic-speaking community.",
+    "navigation": "Navigation",
+    "resources": "Resources",
+    "github": "GitHub",
+    "youtube": "YouTube",
+    "rights": "All rights reserved."
+  },
+  "language": {
+    "english": "English",
+    "arabic": "العربية"
+  }
+}
