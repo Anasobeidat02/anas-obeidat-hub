@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ListChecks, Video, Users } from 'lucide-react';
+import { ListChecks, Video, Users, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -11,6 +11,7 @@ const [stats, setStats] = useState({
   totalQuestions: 0,
   totalVideos: 0,
   totalAdmins: 0,
+  totalLanguages: 0
 });
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
@@ -18,12 +19,12 @@ const [error, setError] = useState(null);
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/admins/stats', {
+        const response = await fetch('https://learinnghub-backend.onrender.com/api/admins/stats', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             // أضف رأس المصادقة إذا كنت تستخدم JWT
-            // 'Authorization': `Bearer ${localStorage.getItem('adminToken')}`,
+            'Authorization': `Bearer ${localStorage.getItem('adminToken')}`,
           },
         });
 
@@ -36,6 +37,7 @@ const [error, setError] = useState(null);
           totalQuestions: data.totalQuestions,
           totalVideos: data.totalVideos,
           totalAdmins: data.totalAdmins,
+          totalLanguages: data.totalLanguages || 0
         });
         setLoading(false);
       } catch (err) {
@@ -63,7 +65,7 @@ const [error, setError] = useState(null);
         <p className="text-gray-500 mt-1">Welcome to the admin dashboard</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Link to="/admin/questions">
           <Card className="hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -86,6 +88,19 @@ const [error, setError] = useState(null);
             <CardContent>
               <div className="text-2xl font-bold">{stats.totalVideos}</div>
               <p className="text-xs text-gray-500">Educational videos</p>
+            </CardContent>
+          </Card>
+        </Link>
+        
+        <Link to="/admin/languages">
+          <Card className="hover:shadow-md transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Programming Languages</CardTitle>
+              <BookOpen className="h-4 w-4 text-gray-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalLanguages}</div>
+              <p className="text-xs text-gray-500">Language guides</p>
             </CardContent>
           </Card>
         </Link>
