@@ -30,3 +30,33 @@ frontEnd/src/locales/en/translation.json: إضافة ترجمات إنجليزي
 
 لتصميم: استخدام shadcn وTailwind CSS لتصميم بطاقات تفاعلية ومقالات منسقة (خطوط مثل Noto Sans Arabic للعربية).
 التدويل: دعم العربية والإنجليزية للنصوص الجديدة.
+
+
+
+
+
+
+I've created a complete implementation for displaying programming languages as cards and detailed articles. Here's what I've done:
+
+Created backend functionality:
+
+A MongoDB model for articles with fields for title, content, requirements, use cases, and libraries
+REST API endpoints for CRUD operations on articles
+Created frontend pages:
+
+A programming languages page that displays cards for each language
+A detailed article page that shows complete information about each language
+Added a new section to the admin dashboard for managing articles
+Implemented beautiful design:
+
+Card layout for languages with color gradients
+Responsive design that works on all devices
+Proper typography and spacing for article content
+Added navigation:
+
+Updated the home page with a link to the programming languages page
+Added programming languages to the admin sidebar
+Added internationalization:
+
+Updated both English and Arabic translation files
+These files have been modified: backend/server.js, frontEnd/src/lib/api.ts, frontEnd/src/pages/Index.tsx, frontEnd/src/components/admin/AdminLayout.tsx, frontEnd/src/App.tsx, and the translation files.
