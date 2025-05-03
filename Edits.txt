@@ -1,0 +1,32 @@
+Go to the frontEnd folder. I want to add a new page with a beautiful design to display programming sections and languages ​​as cards. When the user clicks on the card, it opens as an article with a beautiful design and font format. This page briefly explains the selected programming language, its learning requirements, its uses, and the most common libraries for that language.
+
+Of course, I want to add these articles to the database in a new column and display them from the database (taking into account the rows and formatting).
+
+I want to add a new column to the admin dashboard to display articles from the database, allowing me to edit, add, or delete them.
+
+Finally, I would like it to notify me of any files that have been modified.
+
+
+
+إليك الملخص المحدث للملفات التي سيتم إنشاؤها أو تعديلها لإضافة صفحة لغات البرمجة، مقالة تفصيلية، عمود في لوحة الإدارة، وزر في الشاشة الرئيسية.
+
+ملفات جديدة
+backend/models/Article.js: نموذج Mongoose لتخزين المقالات (العنوان، الوصف، المتطلبات، الاستخدامات، المكتبات، اللغة).
+backend/routes/articles.js: مسارات API (GET, POST, PUT, DELETE) لإدارة المقالات.
+frontEnd/src/pages/ProgrammingLanguages.tsx: صفحة لعرض بطاقات لغات البرمجة.
+frontEnd/src/pages/ArticleDetail.tsx: صفحة لعرض تفاصيل المقالة.
+frontEnd/src/components/programming/LanguageCard.tsx: مكون لتصميم بطاقة لغة البرمجة.
+frontEnd/src/components/admin/ArticleForm.tsx: مكون لإضافة/تعديل المقالات في لوحة الإدارة.
+frontEnd/src/lib/api/articles.ts: دوال لاستدعاء نقاط نهاية API للمقالات.
+ملفات معدلة
+backend/server.js: إضافة مسار /articles لتضمين مسارات المقالات.
+backend/seeder.js: إضافة بيانات عينة للمقالات.
+frontEnd/src/App.tsx: إضافة مسارات /programming-languages و/articles/:id.
+frontEnd/src/pages/Index.tsx: إضافة زر في الشاشة الرئيسية للانتقال إلى /programming-languages.
+frontEnd/src/pages/admin/AdminDashboard.tsx: إضافة قسم لإدارة المقالات (عرض، إضافة، تعديل، حذف).
+frontEnd/src/locales/ar/translation.json: إضافة ترجمات عربية لنصوص الصفحة والزر الجديد.
+frontEnd/src/locales/en/translation.json: إضافة ترجمات إنجليزية لنصوص الصفحة والزر الجديد.
+
+
+لتصميم: استخدام shadcn وTailwind CSS لتصميم بطاقات تفاعلية ومقالات منسقة (خطوط مثل Noto Sans Arabic للعربية).
+التدويل: دعم العربية والإنجليزية للنصوص الجديدة.
