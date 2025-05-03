@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const slugify = require('slugify');
 const Article = require('./models/Article');
 const Admin = require('./models/Admin');
 
@@ -282,76 +283,6 @@ C++ bridges the gap between high-level and low-level programming, offering both 
     language: 'en',
     icon: 'https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png',
     color: 'blue'
-  },
-  {
-    title: 'C#',
-    description: 'A modern, object-oriented programming language developed by Microsoft for the .NET ecosystem.',
-    content: `# C#: Modern and Versatile
-
-C# (pronounced "C-sharp") is a modern, object-oriented programming language developed by Microsoft as part of its .NET initiative. First released in 2000, C# was designed by Anders Hejlsberg and has since evolved through multiple versions, each adding new features and capabilities.
-
-## Design Philosophy
-
-C# was designed to be simple, modern, general-purpose, and object-oriented, while maintaining the expressiveness and elegance of C-style languages. It was intended to provide a balance between rapid development and performance.
-
-## Key Features
-
-* Object-oriented design
-* Type safety
-* Garbage collection
-* Strong typing
-* Component-oriented
-* Structured exception handling
-* Versioning and backward compatibility
-* Lambda expressions and LINQ
-* Async programming
-
-C# continues to evolve with regular updates, making it a modern language suited for current and future development needs.`,
-    requirements: [
-      '.NET SDK',
-      'Visual Studio or another IDE',
-      'Basic understanding of programming concepts',
-      'Understanding of object-oriented principles'
-    ],
-    useCases: [
-      'Windows applications',
-      'Web applications with ASP.NET',
-      'Game development with Unity',
-      'Mobile development with Xamarin',
-      'Enterprise software',
-      'Cloud services with Azure',
-      'IoT applications'
-    ],
-    libraries: [
-      {
-        name: '.NET Framework',
-        description: 'A software framework developed by Microsoft that runs primarily on Microsoft Windows.',
-        url: 'https://dotnet.microsoft.com'
-      },
-      {
-        name: 'ASP.NET Core',
-        description: 'A cross-platform, high-performance, open-source framework for building modern, cloud-based, Internet-connected applications.',
-        url: 'https://dotnet.microsoft.com/apps/aspnet'
-      },
-      {
-        name: 'Entity Framework',
-        description: 'An open-source object-relational mapping (ORM) framework for ADO.NET.',
-        url: 'https://docs.microsoft.com/en-us/ef/'
-      },
-      {
-        name: 'Unity',
-        description: 'A cross-platform game engine used to develop video games for web plugins, desktop platforms, consoles, and mobile devices.',
-        url: 'https://unity.com'
-      },
-      {
-        name: 'Xamarin',
-        description: 'An open-source platform for building modern and performant applications for iOS, Android, and Windows with .NET.',
-        url: 'https://dotnet.microsoft.com/apps/xamarin'
-      }
-    ],
-    language: 'en',
-    icon: 'https://cdn.jsdelivr.net/npm/programming-languages-logos/src/csharp/csharp.png',
-    color: 'purple'
   }
 ];
 
@@ -367,11 +298,16 @@ const importArticleData = async () => {
       throw new Error('Superadmin not found. Please run the main seeder first.');
     }
 
-    // Add admin reference to articles
-    const articlesWithAdmin = articleData.map(article => ({
-      ...article,
-      createdBy: superAdmin._id
-    }));
+    // Add admin reference and slug to articles
+    const articlesWithAdmin = articleData.map(article => {
+      let title = article.title;
+      if (title === 'C++') title = 'cpp';
+      return {
+        ...article,
+        slug: slugify(title, { lower: true, strict: true }),
+        createdBy: superAdmin._id
+      };
+    });
 
     // Create articles
     await Article.create(articlesWithAdmin);
