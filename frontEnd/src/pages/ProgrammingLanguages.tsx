@@ -1,23 +1,36 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ProgrammingLanguage } from '@/lib/types';
-import { getAllLanguages } from '@/lib/api';
+import { getAllArticles } from '@/lib/api';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+
+interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  icon: string;
+  color: string;
+  language: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 const ProgrammingLanguages = () => {
-  const [languages, setLanguages] = useState<ProgrammingLanguage[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { toast } = useToast();
 
   useEffect(() => {
-    const fetchLanguages = async () => {
+    const fetchArticles = async () => {
       try {
-        const data = await getAllLanguages();
-        setLanguages(data);
+        const data = await getAllArticles();
+        setArticles(data);
       } catch (error) {
-        console.error('Failed to fetch languages:', error);
+        console.error('Failed to fetch articles:', error);
         toast({
           title: 'Error',
           description: 'Failed to load programming languages. Please try again later.',
@@ -28,7 +41,7 @@ const ProgrammingLanguages = () => {
       }
     };
 
-    fetchLanguages();
+    fetchArticles();
   }, [toast]);
 
   const getRandomGradient = (color: string) => {
@@ -48,73 +61,74 @@ const ProgrammingLanguages = () => {
     return gradients[color as keyof typeof gradients] || 'bg-gradient-to-br from-slate-500 to-gray-600';
   };
 
-  if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold mb-8">Programming Languages</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {[...Array(8)].map((_, i) => (
-            <Card key={i} className="h-64 animate-pulse bg-gray-100">
-              <CardContent className="p-0 h-full">
-                <div className="h-full flex flex-col">
-                  <div className="h-1/2 bg-gray-200"></div>
-                  <div className="p-4 space-y-2">
-                    <div className="h-6 bg-gray-200 rounded w-3/4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-full"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-8">Programming Languages</h1>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
       
-      {languages.length === 0 ? (
-        <div className="text-center py-16">
-          <p className="text-xl text-gray-500">No programming languages found.</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {languages.map((language) => (
-            <Link 
-              key={language.id} 
-              to={`/languages/${language.slug}`} 
-              className="block transform transition-transform hover:scale-105"
-            >
-              <Card className="overflow-hidden h-64 shadow-md hover:shadow-xl">
-                <CardContent className="p-0 h-full">
-                  <div className="h-full flex flex-col">
-                    <div className={`${getRandomGradient(language.color)} h-1/2 flex items-center justify-center p-4`}>
-                      <div className="w-20 h-20 text-white flex items-center justify-center">
-                        {language.icon ? (
-                          <img 
-                            src={language.icon} 
-                            alt={`${language.name} icon`}
-                            className="w-full h-full object-contain"
-                          />
-                        ) : (
-                          <span className="text-4xl font-bold">{language.name.charAt(0)}</span>
-                        )}
+      <main className="flex-grow">
+        <div className="container mx-auto px-4 py-16">
+          <h1 className="text-4xl font-bold mb-8">Programming Languages</h1>
+          
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {[...Array(8)].map((_, i) => (
+                <Card key={i} className="h-64 animate-pulse bg-gray-100">
+                  <CardContent className="p-0 h-full">
+                    <div className="h-full flex flex-col">
+                      <div className="h-1/2 bg-gray-200"></div>
+                      <div className="p-4 space-y-2">
+                        <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+                        <div className="h-4 bg-gray-200 rounded w-full"></div>
+                        <div className="h-4 bg-gray-200 rounded w-2/3"></div>
                       </div>
                     </div>
-                    <div className="p-4">
-                      <h2 className="text-xl font-bold mb-2">{language.name}</h2>
-                      <p className="text-sm text-gray-600 line-clamp-3">{language.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : articles.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-xl text-gray-500">No programming languages found.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {articles.map((article) => (
+                <Link 
+                  key={article.id} 
+                  to={`/articles/${article.slug}`} 
+                  className="block transform transition-transform hover:scale-105"
+                >
+                  <Card className="overflow-hidden h-64 shadow-md hover:shadow-xl">
+                    <CardContent className="p-0 h-full">
+                      <div className="h-full flex flex-col">
+                        <div className={`${getRandomGradient(article.color)} h-1/2 flex items-center justify-center p-4`}>
+                          <div className="w-20 h-20 text-white flex items-center justify-center">
+                            {article.icon ? (
+                              <img 
+                                src={article.icon} 
+                                alt={`${article.title} icon`}
+                                className="w-full h-full object-contain"
+                              />
+                            ) : (
+                              <span className="text-4xl font-bold">{article.title.charAt(0)}</span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="p-4">
+                          <h2 className="text-xl font-bold mb-2">{article.title}</h2>
+                          <p className="text-sm text-gray-600 line-clamp-3">{article.description}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+      </main>
+      
+      <Footer />
     </div>
   );
 };

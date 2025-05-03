@@ -7,3 +7,4 @@ export * from './api/admin';
 export * from './api/questions';
 export * from './api/languages';
 export * from './api/blogs';
+export * from './api/articles';

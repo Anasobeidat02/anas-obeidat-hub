@@ -7,7 +7,8 @@ import {
   ListChecks, 
   Video, 
   Users,
-  BookOpen
+  BookOpen,
+  FileText
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -67,6 +68,16 @@ const AdminLayout = () => {
               >
                 <BookOpen className="h-4 w-4" />
                 Languages
+              </Button>
+            </Link>
+            
+            <Link to="/admin/articles">
+              <Button 
+                variant="ghost" 
+                className={`w-full justify-start gap-2 ${isActive('/admin/articles')}`}
+              >
+                <FileText className="h-4 w-4" />
+                Articles
               </Button>
             </Link>
             
