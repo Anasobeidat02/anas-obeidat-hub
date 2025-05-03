@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const librarySchema = new mongoose.Schema({
@@ -22,7 +21,6 @@ const articleSchema = new mongoose.Schema({
   },
   slug: {
     type: String,
-    required: true,
     unique: true
   },
   description: {
@@ -64,10 +62,18 @@ const articleSchema = new mongoose.Schema({
 // Create slug from title before saving
 articleSchema.pre('save', function(next) {
   if (this.isModified('title')) {
-    this.slug = this.title
+    // تعيين قيم slug مخصصة لبعض العناوين
+    const specialCases = {
+      'C++': 'cpp',
+      'C#': 'csharp'
+    };
+
+    // استخدام القيمة المخصصة إذا وجدت، وإلا تحويل العنوان
+    this.slug = specialCases[this.title] || this.title
       .toLowerCase()
-      .replace(/[^\w\s]/gi, '')
-      .replace(/\s+/g, '-');
+      .replace(/[^\w\s]/gi, '-') // استبدال الأحرف غير الأبجدية بالشرطة
+      .replace(/\s+/g, '-') // استبدال المسافات بالشرطة
+      .replace(/-+/g, '-'); // إزالة الشرطات المتكررة
   }
   if (this.isModified()) {
     this.updatedAt = Date.now();
