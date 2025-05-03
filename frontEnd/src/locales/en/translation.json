@@ -5,7 +5,8 @@
     "videos": "Videos",
     "about": "About",
     "contact": "Contact",
-    "quiz": "Quiz"
+    "quiz": "Quiz",
+    "programmingLanguages": "Programming Languages"
   },
   "home": {
     "hero": {
@@ -23,7 +24,8 @@
       "subtitle": "Join me on a journey to master web development with practical tutorials and real-world examples.",
       "youtube": "Subscribe on YouTube",
       "browseVideos": "Browse Videos",
-      "takeQuiz": "Take a Quiz"
+      "takeQuiz": "Take a Quiz",
+      "programmingLanguages": "Programming Languages"
     }
   },
   "quiz": {
@@ -43,6 +45,15 @@
     "noQuestionsDesc": "There are no {{language}} questions available currently.",
     "limitedQuestions": "Only {{count}} {{language}} questions are available. Starting quiz with available questions."
   },
+  "programmingLanguages": {
+    "title": "Programming Languages",
+    "description": "Explore various programming languages and learn about their features, requirements, and uses.",
+    "viewMore": "View Details",
+    "requirements": "Learning Requirements",
+    "useCases": "Common Use Cases",
+    "libraries": "Popular Libraries & Frameworks",
+    "backToList": "Back to Languages"
+  },
   "footer": {
     "bio": "Full Stack Developer and Educator focused on creating engaging programming content for the Arabic-speaking community.",
     "navigation": "Navigation",
@@ -54,5 +65,17 @@
   "language": {
     "english": "English",
     "arabic": "العربية"
+  },
+  "admin": {
+    "articles": {
+      "title": "Programming Articles",
+      "description": "Manage programming language articles",
+      "add": "Add New Article",
+      "edit": "Edit Article",
+      "delete": "Delete Article",
+      "deleteConfirm": "Are you sure you want to delete this article? This action cannot be undone.",
+      "search": "Search articles...",
+      "noArticles": "No articles found"
+    }
   }
 }

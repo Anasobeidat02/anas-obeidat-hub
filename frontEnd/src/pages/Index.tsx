@@ -39,6 +39,11 @@ const Index = () => {
                   {t('home.cta.browseVideos')}
                 </Button>
               </Link>
+              <Link to="/programming-languages">
+                <Button size="lg" variant="outline" className="border-white text-secondary-foreground hover:bg-white/20 px-6">
+                  Programming Languages
+                </Button>
+              </Link>
               <Link to="/quiz">
                 <Button size="lg" variant="outline" className="border-white text-secondary-foreground hover:bg-white/20 px-6">
                   {t('home.cta.takeQuiz')}

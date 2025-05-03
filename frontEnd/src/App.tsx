@@ -17,9 +17,11 @@ import AdminVideos from "./pages/admin/AdminVideos";
 import AdminLanguages from "./pages/admin/AdminLanguages";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminBlogs from "./pages/admin/AdminBlogs";
+import AdminArticles from "./pages/admin/AdminArticles";
 import RequireAuth from "./components/admin/RequireAuth";
 import Quiz from "./pages/Quiz";
 import ProgrammingLanguages from "./pages/ProgrammingLanguages";
+import ArticleDetail from "./pages/ArticleDetail";
 import LanguageDetail from "./pages/LanguageDetail";
 import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
@@ -39,7 +41,8 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/quiz" element={<Quiz />} />
-          <Route path="/languages" element={<ProgrammingLanguages />} />
+          <Route path="/programming-languages" element={<ProgrammingLanguages />} />
+          <Route path="/articles/:slug" element={<ArticleDetail />} />
           <Route path="/languages/:slug" element={<LanguageDetail />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:slug" element={<BlogDetail />} />
@@ -52,6 +55,7 @@ const App = () => (
             <Route path="videos" element={<AdminVideos />} />
             <Route path="languages" element={<AdminLanguages />} />
             <Route path="blogs" element={<AdminBlogs />} />
+            <Route path="articles" element={<AdminArticles />} />
             <Route path="users" element={<AdminUsers />} />
           </Route>
           
