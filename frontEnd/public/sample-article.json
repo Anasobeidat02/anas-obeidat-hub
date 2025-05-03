@@ -1,0 +1,32 @@
+
+{
+  "title": "Example Programming Language",
+  "description": "A brief description of the programming language.",
+  "content": "# Main Heading\n\nDetailed content about the programming language goes here. You can use markdown formatting.\n\n## Features\n\n- Feature 1\n- Feature 2\n- Feature 3\n\n## History\n\nInformation about the history of the language.",
+  "requirements": [
+    "Basic programming knowledge",
+    "Computer with development environment",
+    "Text editor or IDE"
+  ],
+  "useCases": [
+    "Web Development",
+    "Mobile Applications",
+    "Data Analysis",
+    "Machine Learning"
+  ],
+  "libraries": [
+    {
+      "name": "Example Library 1",
+      "description": "A popular framework for this language",
+      "url": "https://example.com/library1"
+    },
+    {
+      "name": "Example Library 2",
+      "description": "Another useful library for this language",
+      "url": "https://example.com/library2"
+    }
+  ],
+  "language": "en",
+  "icon": "https://cdn.example.com/icon.png",
+  "color": "blue"
+}

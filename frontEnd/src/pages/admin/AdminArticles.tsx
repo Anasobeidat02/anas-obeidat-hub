@@ -24,9 +24,15 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Plus, Search, Pencil, Trash2 } from 'lucide-react';
+import { Plus, Search, Pencil, Trash2, FileJson } from 'lucide-react';
 import ArticleForm from '@/components/admin/ArticleForm';
 import { getAllArticles, createArticle, updateArticle, deleteArticle } from '@/lib/api';
+
+interface Library {
+  name: string;
+  description: string;
+  url: string;
+}
 
 interface Article {
   id: string;
@@ -55,6 +61,8 @@ const AdminArticles = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [currentArticle, setCurrentArticle] = useState<Article | undefined>(undefined);
   const [isEditing, setIsEditing] = useState(false);
+  const [showJsonImportDialog, setShowJsonImportDialog] = useState(false);
+  const [jsonData, setJsonData] = useState('');
   const { toast } = useToast();
 
   useEffect(() => {
@@ -137,6 +145,68 @@ const AdminArticles = () => {
     }
   };
 
+  const handleJsonFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const content = event.target?.result as string;
+        setJsonData(content);
+      } catch (error) {
+        console.error('Error reading file:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to read JSON file',
+          variant: 'destructive',
+        });
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  const handleJsonImport = async () => {
+    try {
+      if (!jsonData) {
+        toast({
+          title: 'Error',
+          description: 'No JSON data provided',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      // Parse JSON data
+      const parsedData = JSON.parse(jsonData);
+      
+      // Handle both single article and array of articles
+      const articlesToImport = Array.isArray(parsedData) ? parsedData : [parsedData];
+      
+      // Create each article
+      let successCount = 0;
+      for (const article of articlesToImport) {
+        await createArticle(article);
+        successCount++;
+      }
+      
+      setShowJsonImportDialog(false);
+      setJsonData('');
+      toast({
+        title: 'Success',
+        description: `${successCount} article(s) imported successfully`,
+      });
+      fetchArticles();
+    } catch (error) {
+      console.error('Error importing articles from JSON:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to import articles. Please check your JSON format.',
+        variant: 'destructive',
+      });
+    }
+  };
+
   const openEditDialog = (article: Article) => {
     setCurrentArticle(article);
     setIsEditing(true);
@@ -174,9 +244,14 @@ const AdminArticles = () => {
           <p className="text-gray-500">Manage programming language articles</p>
         </div>
         
-        <Button onClick={openCreateDialog}>
-          <Plus className="mr-2 h-4 w-4" /> Add New Article
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={openCreateDialog}>
+            <Plus className="mr-2 h-4 w-4" /> Add New Article
+          </Button>
+          <Button variant="outline" onClick={() => setShowJsonImportDialog(true)}>
+            <FileJson className="mr-2 h-4 w-4" /> Import JSON
+          </Button>
+        </div>
       </div>
 
       <div className="flex items-center space-x-2">
@@ -281,6 +356,54 @@ const AdminArticles = () => {
             onSubmit={isEditing ? handleUpdateArticle : handleCreateArticle}
             isEditing={isEditing}
           />
+        </DialogContent>
+      </Dialog>
+
+      {/* JSON Import Dialog */}
+      <Dialog open={showJsonImportDialog} onOpenChange={setShowJsonImportDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Import Articles from JSON</DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="json-file">Upload JSON File</Label>
+              <Input 
+                id="json-file" 
+                type="file" 
+                accept=".json" 
+                onChange={handleJsonFileUpload}
+                className="mt-1"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="json-data">Or Paste JSON Content</Label>
+              <textarea 
+                id="json-data"
+                value={jsonData}
+                onChange={(e) => setJsonData(e.target.value)}
+                className="w-full h-40 border rounded-md p-2 mt-1"
+                placeholder='{
+  "title": "Example Language",
+  "description": "Description here",
+  "content": "Content here",
+  "requirements": ["req1", "req2"],
+  "useCases": ["use1", "use2"],
+  "libraries": [{"name": "lib1", "description": "desc", "url": "http://example.com"}],
+  "language": "en",
+  "icon": "url",
+  "color": "blue"
+}'
+              />
+            </div>
+            
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setShowJsonImportDialog(false)}>Cancel</Button>
+              <Button onClick={handleJsonImport}>Import</Button>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
