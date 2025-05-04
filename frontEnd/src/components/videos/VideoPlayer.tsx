@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { Video } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // استيراد أنماط react-toastify
+import { FaCopy } from "react-icons/fa"; // استيراد أيقونة النسخ من react-icons
+
 
 interface VideoPlayerProps {
   video: Video;
@@ -43,6 +47,32 @@ const VideoPlayer = ({ video }: VideoPlayerProps) => {
 
     return () => clearTimeout(timer);
   }, [video.id, video.youtubeUrl]);
+
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(video.content);
+      toast.success("Text copied to clipboard!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+    } catch (error) {
+      toast.error("Failed to copy text!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -138,6 +168,15 @@ const VideoPlayer = ({ video }: VideoPlayerProps) => {
               Additional Resources
             </h2>
             <div className="prose max-w-none">
+              <div className="flex items-center gap-2 mb-2">
+                <button
+                  onClick={handleCopy}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                >
+                  <FaCopy className="w-5 h-5" />
+                  Copy Text
+                </button>
+              </div>
               <pre className="bg-gray-50 p-4 rounded-md overflow-auto">
                 {video.content}
               </pre>
@@ -145,6 +184,7 @@ const VideoPlayer = ({ video }: VideoPlayerProps) => {
           </CardContent>
         </Card>
       )}
+       <ToastContainer />
     </div>
   );
 };

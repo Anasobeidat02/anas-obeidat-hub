@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllArticles } from '@/lib/api';
@@ -6,6 +5,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { Input } from "@/components/ui/input";
+import { Search } from 'lucide-react';
 
 interface Article {
   id: string;
@@ -21,7 +22,9 @@ interface Article {
 
 const ProgrammingLanguages = () => {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -29,6 +32,7 @@ const ProgrammingLanguages = () => {
       try {
         const data = await getAllArticles();
         setArticles(data);
+        setFilteredArticles(data);
       } catch (error) {
         console.error('Failed to fetch articles:', error);
         toast({
@@ -44,6 +48,14 @@ const ProgrammingLanguages = () => {
     fetchArticles();
   }, [toast]);
 
+  useEffect(() => {
+    setFilteredArticles(
+      articles.filter(article =>
+        article.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+  }, [searchTerm, articles]);
+
   const getRandomGradient = (color: string) => {
     const gradients = {
       blue: 'bg-gradient-to-br from-blue-500 to-purple-600',
@@ -56,6 +68,8 @@ const ProgrammingLanguages = () => {
       orange: 'bg-gradient-to-br from-orange-500 to-amber-600',
       indigo: 'bg-gradient-to-br from-indigo-500 to-blue-600',
       cyan: 'bg-gradient-to-br from-cyan-500 to-sky-600',
+      silver: 'bg-gradient-to-br from-gray-400 to-gray-600',
+      black: 'bg-gradient-to-br from-gray-700 to-gray-900',
     };
 
     return gradients[color as keyof typeof gradients] || 'bg-gradient-to-br from-slate-500 to-gray-600';
@@ -69,6 +83,16 @@ const ProgrammingLanguages = () => {
         <div className="container mx-auto px-4 py-16">
           <h1 className="text-4xl font-bold mb-8">Programming Languages</h1>
           
+          <div className="flex items-center space-x-2 mb-8">
+            <Search className="h-5 w-5 text-gray-400" />
+            <Input
+              placeholder="Search articles..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="max-w-sm"
+            />
+          </div>
+
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {[...Array(8)].map((_, i) => (
@@ -86,13 +110,13 @@ const ProgrammingLanguages = () => {
                 </Card>
               ))}
             </div>
-          ) : articles.length === 0 ? (
+          ) : filteredArticles.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-xl text-gray-500">No programming languages found.</p>
+              <p className="text-xl text-gray-500">No articles found.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {articles.map((article) => (
+              {filteredArticles.map((article) => (
                 <Link 
                   key={article.id} 
                   to={`/articles/${article.slug}`} 

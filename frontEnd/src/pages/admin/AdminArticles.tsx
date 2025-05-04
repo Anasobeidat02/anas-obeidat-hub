@@ -1,15 +1,14 @@
-
-import { useState, useEffect } from 'react';
-import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { useState, useEffect } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,13 +19,18 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Plus, Search, Pencil, Trash2, FileJson } from 'lucide-react';
-import ArticleForm from '@/components/admin/ArticleForm';
-import { getAllArticles, createArticle, updateArticle, deleteArticle } from '@/lib/api';
+} from "@/components/ui/alert-dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Plus, Search, Pencil, Trash2, FileJson } from "lucide-react";
+import ArticleForm from "@/components/admin/ArticleForm";
+import {
+  getAllArticles,
+  createArticle,
+  updateArticle,
+  deleteArticle,
+} from "@/lib/api";
 
 interface Library {
   name: string;
@@ -57,13 +61,37 @@ interface Article {
 const AdminArticles = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [showDialog, setShowDialog] = useState(false);
-  const [currentArticle, setCurrentArticle] = useState<Article | undefined>(undefined);
+  const [currentArticle, setCurrentArticle] = useState<Article | undefined>(
+    undefined
+  );
   const [isEditing, setIsEditing] = useState(false);
   const [showJsonImportDialog, setShowJsonImportDialog] = useState(false);
-  const [jsonData, setJsonData] = useState('');
+  const [jsonData, setJsonData] = useState("");
   const { toast } = useToast();
+
+  // Color gradient map similar to ProgrammingLanguages.tsx and ArticleDetail.tsx
+  const getGradient = (color: string) => {
+    const gradients: { [key: string]: string } = {
+      blue: "bg-gradient-to-br from-blue-500 to-purple-600",
+      red: "bg-gradient-to-br from-red-500 to-orange-600",
+      green: "bg-gradient-to-br from-green-500 to-teal-600",
+      yellow: "bg-gradient-to-br from-yellow-500 to-amber-600",
+      purple: "bg-gradient-to-br from-purple-500 to-indigo-600",
+      pink: "bg-gradient-to-br from-pink-500 to-rose-600",
+      teal: "bg-gradient-to-br from-teal-500 to-cyan-600",
+      orange: "bg-gradient-to-br from-orange-500 to-amber-600",
+      indigo: "bg-gradient-to-br from-indigo-500 to-blue-600",
+      cyan: "bg-gradient-to-br from-cyan-500 to-sky-600",
+      silver: "bg-gradient-to-br from-gray-400 to-gray-600",
+      black: "bg-gradient-to-br from-gray-700 to-gray-900",
+    };
+    return (
+      gradients[color.toLowerCase()] ||
+      "bg-gradient-to-br from-slate-500 to-gray-600"
+    );
+  };
 
   useEffect(() => {
     fetchArticles();
@@ -75,11 +103,11 @@ const AdminArticles = () => {
       const data = await getAllArticles();
       setArticles(data);
     } catch (error) {
-      console.error('Error fetching articles:', error);
+      console.error("Error fetching articles:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to load articles',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to load articles",
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
@@ -91,38 +119,38 @@ const AdminArticles = () => {
       await createArticle(formData);
       setShowDialog(false);
       toast({
-        title: 'Success',
-        description: 'Article created successfully',
+        title: "Success",
+        description: "Article created successfully",
       });
       fetchArticles();
     } catch (error) {
-      console.error('Error creating article:', error);
+      console.error("Error creating article:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to create article',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to create article",
+        variant: "destructive",
       });
     }
   };
 
   const handleUpdateArticle = async (formData: any) => {
     if (!currentArticle?.id) return;
-    
+
     try {
       await updateArticle(currentArticle.id, formData);
       setShowDialog(false);
       setCurrentArticle(undefined);
       toast({
-        title: 'Success',
-        description: 'Article updated successfully',
+        title: "Success",
+        description: "Article updated successfully",
       });
       fetchArticles();
     } catch (error) {
-      console.error('Error updating article:', error);
+      console.error("Error updating article:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to update article',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to update article",
+        variant: "destructive",
       });
     }
   };
@@ -131,16 +159,16 @@ const AdminArticles = () => {
     try {
       await deleteArticle(id);
       toast({
-        title: 'Success',
-        description: 'Article deleted successfully',
+        title: "Success",
+        description: "Article deleted successfully",
       });
       fetchArticles();
     } catch (error) {
-      console.error('Error deleting article:', error);
+      console.error("Error deleting article:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to delete article',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to delete article",
+        variant: "destructive",
       });
     }
   };
@@ -155,11 +183,11 @@ const AdminArticles = () => {
         const content = event.target?.result as string;
         setJsonData(content);
       } catch (error) {
-        console.error('Error reading file:', error);
+        console.error("Error reading file:", error);
         toast({
-          title: 'Error',
-          description: 'Failed to read JSON file',
-          variant: 'destructive',
+          title: "Error",
+          description: "Failed to read JSON file",
+          variant: "destructive",
         });
       }
     };
@@ -170,39 +198,42 @@ const AdminArticles = () => {
     try {
       if (!jsonData) {
         toast({
-          title: 'Error',
-          description: 'No JSON data provided',
-          variant: 'destructive',
+          title: "Error",
+          description: "No JSON data provided",
+          variant: "destructive",
         });
         return;
       }
 
       // Parse JSON data
       const parsedData = JSON.parse(jsonData);
-      
+
       // Handle both single article and array of articles
-      const articlesToImport = Array.isArray(parsedData) ? parsedData : [parsedData];
-      
+      const articlesToImport = Array.isArray(parsedData)
+        ? parsedData
+        : [parsedData];
+
       // Create each article
       let successCount = 0;
       for (const article of articlesToImport) {
         await createArticle(article);
         successCount++;
       }
-      
+
       setShowJsonImportDialog(false);
-      setJsonData('');
+      setJsonData("");
       toast({
-        title: 'Success',
+        title: "Success",
         description: `${successCount} article(s) imported successfully`,
       });
       fetchArticles();
     } catch (error) {
-      console.error('Error importing articles from JSON:', error);
+      console.error("Error importing articles from JSON:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to import articles. Please check your JSON format.',
-        variant: 'destructive',
+        title: "Error",
+        description:
+          "Failed to import articles. Please check your JSON format.",
+        variant: "destructive",
       });
     }
   };
@@ -224,7 +255,7 @@ const AdminArticles = () => {
     setCurrentArticle(undefined);
   };
 
-  const filteredArticles = articles.filter(article =>
+  const filteredArticles = articles.filter((article) =>
     article.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -243,12 +274,15 @@ const AdminArticles = () => {
           <h1 className="text-3xl font-bold">Programming Articles</h1>
           <p className="text-gray-500">Manage programming language articles</p>
         </div>
-        
+
         <div className="flex gap-2">
           <Button onClick={openCreateDialog}>
             <Plus className="mr-2 h-4 w-4" /> Add New Article
           </Button>
-          <Button variant="outline" onClick={() => setShowJsonImportDialog(true)}>
+          <Button
+            variant="outline"
+            onClick={() => setShowJsonImportDialog(true)}
+          >
             <FileJson className="mr-2 h-4 w-4" /> Import JSON
           </Button>
         </div>
@@ -259,7 +293,7 @@ const AdminArticles = () => {
         <Input
           placeholder="Search articles..."
           value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className="max-w-sm"
         />
       </div>
@@ -268,7 +302,7 @@ const AdminArticles = () => {
         <TabsList>
           <TabsTrigger value="all">All Articles</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="all" className="p-0">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredArticles.length === 0 ? (
@@ -276,39 +310,52 @@ const AdminArticles = () => {
                 <p className="text-xl text-gray-500">No articles found</p>
               </div>
             ) : (
-              filteredArticles.map(article => (
-                <Card key={article.id} className="overflow-hidden">
-                  <div className={`bg-${article.color}-100 p-4 flex items-center gap-3`}>
+              filteredArticles.map((article) => (
+                <Card key={article._id} className="overflow-hidden">
+                  <div
+                    className={`${getGradient(
+                      article.color
+                    )} p-4 flex items-center gap-3 !bg-gradient-to-br`}
+                  >
                     {article.icon && (
                       <div className="w-10 h-10 bg-white rounded-md flex items-center justify-center">
-                        <img src={article.icon} alt={article.title} className="w-6 h-6" />
+                        <img
+                          src={article.icon}
+                          alt={article.title}
+                          className="w-6 h-6"
+                        />
                       </div>
                     )}
-                    <h3 className="font-bold truncate">{article.title}</h3>
+                    <h3 className="font-bold text-white truncate">
+                      {article.title}
+                    </h3>
                   </div>
-                  
+
                   <CardContent className="p-4">
-                    <p className="text-sm text-gray-500 mb-4 line-clamp-2">{article.description}</p>
-                    
+                    <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                      {article.description}
+                    </p>
+
                     <div className="flex justify-between items-center">
                       <div className="text-xs text-gray-400">
-                        Updated: {new Date(article.updatedAt).toLocaleDateString()}
+                        Updated:{" "}
+                        {new Date(article.updatedAt).toLocaleDateString()}
                       </div>
                       <div className="flex gap-2">
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
+                        <Button
+                          variant="outline"
+                          size="sm"
                           className="h-8 px-2"
                           onClick={() => openEditDialog(article)}
                         >
                           <Pencil className="h-4 w-4" />
                         </Button>
-                        
+
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
+                            <Button
+                              variant="outline"
+                              size="sm"
                               className="h-8 px-2 text-red-500 hover:text-red-700"
                             >
                               <Trash2 className="h-4 w-4" />
@@ -316,15 +363,18 @@ const AdminArticles = () => {
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>
-                              <AlertDialogTitle>Delete Article</AlertDialogTitle>
+                              <AlertDialogTitle>
+                                Delete Article
+                              </AlertDialogTitle>
                               <AlertDialogDescription>
-                                Are you sure you want to delete "{article.title}"? This action cannot be undone.
+                                Are you sure you want to delete "{article.title}
+                                "? This action cannot be undone.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
                               <AlertDialogCancel>Cancel</AlertDialogCancel>
                               <AlertDialogAction
-                                onClick={() => handleDeleteArticle(article.id)}
+                                onClick={() => handleDeleteArticle(article._id)}
                                 className="bg-red-500 hover:bg-red-700"
                               >
                                 Delete
@@ -347,10 +397,10 @@ const AdminArticles = () => {
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
-              {isEditing ? 'Edit Article' : 'Create New Article'}
+              {isEditing ? "Edit Article" : "Create New Article"}
             </DialogTitle>
           </DialogHeader>
-          
+
           <ArticleForm
             initialData={currentArticle}
             onSubmit={isEditing ? handleUpdateArticle : handleCreateArticle}
@@ -360,27 +410,30 @@ const AdminArticles = () => {
       </Dialog>
 
       {/* JSON Import Dialog */}
-      <Dialog open={showJsonImportDialog} onOpenChange={setShowJsonImportDialog}>
+      <Dialog
+        open={showJsonImportDialog}
+        onOpenChange={setShowJsonImportDialog}
+      >
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Import Articles from JSON</DialogTitle>
           </DialogHeader>
-          
+
           <div className="space-y-4">
             <div>
               <Label htmlFor="json-file">Upload JSON File</Label>
-              <Input 
-                id="json-file" 
-                type="file" 
-                accept=".json" 
+              <Input
+                id="json-file"
+                type="file"
+                accept=".json"
                 onChange={handleJsonFileUpload}
                 className="mt-1"
               />
             </div>
-            
+
             <div>
               <Label htmlFor="json-data">Or Paste JSON Content</Label>
-              <textarea 
+              <textarea
                 id="json-data"
                 value={jsonData}
                 onChange={(e) => setJsonData(e.target.value)}
@@ -398,9 +451,14 @@ const AdminArticles = () => {
 }'
               />
             </div>
-            
+
             <div className="flex justify-end gap-2">
-              <Button variant="outline" onClick={() => setShowJsonImportDialog(false)}>Cancel</Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowJsonImportDialog(false)}
+              >
+                Cancel
+              </Button>
               <Button onClick={handleJsonImport}>Import</Button>
             </div>
           </div>

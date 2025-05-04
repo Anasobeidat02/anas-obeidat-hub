@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getArticleBySlug } from '@/lib/api/articles';
@@ -6,7 +5,10 @@ import { useToast } from '@/components/ui/use-toast';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Copy } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface Article {
   id: string;
@@ -33,11 +35,49 @@ const ArticleDetail = () => {
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
+  // Color gradient map similar to ProgrammingLanguages.tsx
+  const getGradient = (color: string) => {
+    const gradients: { [key: string]: string } = {
+      blue: 'bg-gradient-to-br from-blue-500 to-purple-600',
+      red: 'bg-gradient-to-br from-red-500 to-orange-600',
+      green: 'bg-gradient-to-br from-green-500 to-teal-600',
+      yellow: 'bg-gradient-to-br from-yellow-500 to-amber-600',
+      purple: 'bg-gradient-to-br from-purple-500 to-indigo-600',
+      pink: 'bg-gradient-to-br from-pink-500 to-rose-600',
+      teal: 'bg-gradient-to-br from-teal-500 to-cyan-600',
+      orange: 'bg-gradient-to-br from-orange-500 to-amber-600',
+      indigo: 'bg-gradient-to-br from-indigo-500 to-blue-600',
+      cyan: 'bg-gradient-to-br from-cyan-500 to-sky-600',
+      silver: 'bg-gradient-to-br from-gray-400 to-gray-600',
+      black: 'bg-gradient-to-br from-gray-700 to-gray-900',
+    };
+    return gradients[color.toLowerCase()] || 'bg-gradient-to-br from-slate-500 to-gray-600';
+  };
+
+  // Function to copy code to clipboard
+  const copyToClipboard = (code: string) => {
+    navigator.clipboard.writeText(code).then(() => {
+      toast({
+        title: 'Copied!',
+        description: 'Code copied to clipboard.',
+        variant: 'default',
+      });
+    }).catch(() => {
+      toast({
+        title: 'Error',
+        description: 'Failed to copy code.',
+        variant: 'destructive',
+      });
+    });
+  };
+
   useEffect(() => {
     const fetchArticle = async () => {
       try {
         if (slug) {
           const data = await getArticleBySlug(slug);
+          console.log('Article data:', data); // Debug: Log article data
+          console.log('Article color:', data.color); // Debug: Log color
           setArticle(data);
         }
       } catch (error) {
@@ -87,15 +127,19 @@ const ArticleDetail = () => {
     );
   }
 
+  // Normalize color and get gradient
+  const normalizedColor = article.color ? article.color.toLowerCase() : 'default';
+  const gradientClass = getGradient(normalizedColor);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-grow">
         {/* Article Header */}
-        <div className={`bg-${article.color}-100 py-12`}>
+        <div className={`${gradientClass} py-12 !bg-gradient-to-br`}>
           <div className="container mx-auto px-4">
-            <Link to="/programming-languages" className="inline-flex items-center text-primary hover:underline mb-6">
+            <Link to="/programming-languages" className="inline-flex items-center text-white hover:underline mb-6">
               <ArrowLeft className="mr-2 h-4 w-4" /> Back to Programming Languages
             </Link>
             
@@ -106,8 +150,8 @@ const ArticleDetail = () => {
                 </div>
               )}
               <div>
-                <h1 className="text-4xl font-bold mb-2">{article.title}</h1>
-                <p className="text-lg text-gray-600">{article.description}</p>
+                <h1 className="text-4xl font-bold mb-2 text-white">{article.title}</h1>
+                <p className="text-lg text-gray-200">{article.description}</p>
               </div>
             </div>
           </div>
@@ -116,7 +160,39 @@ const ArticleDetail = () => {
         {/* Article Content */}
         <div className="container mx-auto px-4 py-12">
           <div className="prose prose-lg max-w-none">
-            <div className="mb-16" dangerouslySetInnerHTML={{ __html: article.content.replace(/\n/g, '<br />') }} />
+            <ReactMarkdown
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  const codeContent = String(children).replace(/\n$/, '');
+                  return !inline && match ? (
+                    <div className="relative group">
+                      <SyntaxHighlighter
+                        style={dracula}
+                        language={match[1]}
+                        PreTag="div"
+                        {...props}
+                      >
+                        {codeContent}
+                      </SyntaxHighlighter>
+                      <button
+                        onClick={() => copyToClipboard(codeContent)}
+                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white p-2 rounded-md hover:bg-gray-700"
+                        title="Copy code"
+                      >
+                        <Copy className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                },
+              }}
+            >
+              {article.content}
+            </ReactMarkdown>
             
             {/* Requirements Section */}
             {article.requirements && article.requirements.length > 0 && (
