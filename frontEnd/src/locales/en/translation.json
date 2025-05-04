@@ -1,81 +1,104 @@
-
 {
-  "navigation": {
-    "home": "Home",
-    "videos": "Videos",
-    "about": "About",
-    "contact": "Contact",
-    "quiz": "Quiz",
-    "programmingLanguages": "Programming Languages"
-  },
-  "home": {
-    "hero": {
-      "title": "Learn Programming in Arabic",
-      "subtitle": "Practical tutorials and real-world examples for web developers",
-      "cta": "Start Learning"
-    },
-    "featured": {
-      "videos": "Featured Videos",
-      "projects": "Featured Projects",
-      "viewAll": "View All"
-    },
-    "cta": {
-      "title": "Ready to Learn Programming in Arabic?",
-      "subtitle": "Join me on a journey to master web development with practical tutorials and real-world examples.",
-      "youtube": "Subscribe on YouTube",
-      "browseVideos": "Browse Videos",
-      "takeQuiz": "Take a Quiz",
-      "programmingLanguages": "Programming Languages"
+  "admin": {
+    "articles": {
+      "add": "Add New Article",
+      "delete": "Delete Article",
+      "deleteConfirm": "Are you sure you want to delete this article? This action cannot be undone.",
+      "description": "Manage programming language articles",
+      "edit": "Edit Article",
+      "noArticles": "No articles found",
+      "search": "Search articles...",
+      "title": "Programming Articles"
     }
   },
-  "quiz": {
-    "title": "Programming Quiz",
-    "description": "Test your programming knowledge with our multiple-choice questions.",
-    "selectLanguage": "Select Programming Language",
-    "chooseLanguage": "Choose a language",
-    "questionCount": "Number of Questions",
-    "chooseNumber": "Choose a number",
-    "startQuiz": "Start Quiz",
-    "question": "Question",
-    "of": "of",
-    "restartQuiz": "Restart Quiz",
-    "nextQuestion": "Next Question",
-    "finishQuiz": "Finish Quiz",
-    "noQuestions": "No questions available",
-    "noQuestionsDesc": "There are no {{language}} questions available currently.",
-    "limitedQuestions": "Only {{count}} {{language}} questions are available. Starting quiz with available questions."
+  "articles": {
+    "backToLanguages": "",
+    "fetchError": "",
+    "fetchErrorDescription": "",
+    "libraries": "",
+    "libraryLink": "",
+    "notFound": "",
+    "notFoundDescription": "",
+    "requirements": "",
+    "useCases": ""
   },
-  "programmingLanguages": {
-    "title": "Programming Languages",
-    "description": "Explore various programming languages and learn about their features, requirements, and uses.",
-    "viewMore": "View Details",
-    "requirements": "Learning Requirements",
-    "useCases": "Common Use Cases",
-    "libraries": "Popular Libraries & Frameworks",
-    "backToList": "Back to Languages"
+  "copy": {
+    "button": "",
+    "error": "",
+    "errorDescription": "",
+    "success": "",
+    "successDescription": ""
   },
   "footer": {
     "bio": "Full Stack Developer and Educator focused on creating engaging programming content for the Arabic-speaking community.",
+    "github": "GitHub",
     "navigation": "Navigation",
     "resources": "Resources",
-    "github": "GitHub",
-    "youtube": "YouTube",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "youtube": "YouTube"
+  },
+  "home": {
+    "cta": {
+      "browseVideos": "Browse Videos",
+      "programmingLanguages": "Programming Languages",
+      "subtitle": "Join me on a journey to master web development with practical tutorials and real-world examples.",
+      "takeQuiz": "Take a Quiz",
+      "title": "Ready to Learn Programming in Arabic?",
+      "youtube": "Subscribe on YouTube"
+    },
+    "featured": {
+      "projects": "Featured Projects",
+      "videos": "Featured Videos",
+      "viewAll": "View All"
+    },
+    "hero": {
+      "cta": "Start Learning",
+      "subtitle": "Practical tutorials and real-world examples for web developers",
+      "title": "Learn Programming in Arabic"
+    }
   },
   "language": {
-    "english": "English",
-    "arabic": "العربية"
+    "arabic": "العربية",
+    "english": "English"
   },
-  "admin": {
-    "articles": {
-      "title": "Programming Articles",
-      "description": "Manage programming language articles",
-      "add": "Add New Article",
-      "edit": "Edit Article",
-      "delete": "Delete Article",
-      "deleteConfirm": "Are you sure you want to delete this article? This action cannot be undone.",
-      "search": "Search articles...",
-      "noArticles": "No articles found"
-    }
+  "navigation": {
+    "about": "About",
+    "contact": "Contact",
+    "home": "Home",
+    "programmingLanguages": "Programming Languages",
+    "quiz": "Quiz",
+    "videos": "Videos"
+  },
+  "programmingLanguages": {
+    "backToList": "Back to Languages",
+    "description": "Explore various programming languages and learn about their features, requirements, and uses.",
+    "libraries": "Popular Libraries & Frameworks",
+    "requirements": "Learning Requirements",
+    "title": "Programming Languages",
+    "useCases": "Common Use Cases",
+    "viewMore": "View Details"
+  },
+  "quiz": {
+    "chooseLanguage": "Choose a language",
+    "chooseNumber": "Choose a number",
+    "description": "Test your programming knowledge with our multiple-choice questions.",
+    "error": "",
+    "fetchError": "",
+    "fetchLanguagesError": "",
+    "finishQuiz": "Finish Quiz",
+    "limitedQuestions": "Only {{count}} {{language}} questions are available. Starting quiz with available questions.",
+    "limitedQuestions_one": "",
+    "limitedQuestions_other": "",
+    "loading": "",
+    "nextQuestion": "Next Question",
+    "noQuestions": "No questions available",
+    "noQuestionsDesc": "There are no {{language}} questions available currently.",
+    "of": "of",
+    "question": "Question",
+    "questionCount": "Number of Questions",
+    "restartQuiz": "Restart Quiz",
+    "selectLanguage": "Select Programming Language",
+    "startQuiz": "Start Quiz",
+    "title": "Programming Quiz"
   }
 }

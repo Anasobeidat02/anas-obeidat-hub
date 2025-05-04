@@ -140,7 +140,7 @@ const VideoPlayer = ({ video }: VideoPlayerProps) => {
           </div>
         </div>
 
-        <div className="prose max-w-none">
+        <div className="prose max-w-none" dir="rtl">
           <p
             className={`text-sm "text-gray-600" ${
               isExpanded ? "" : "line-clamp-5"

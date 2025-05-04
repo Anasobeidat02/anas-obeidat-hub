@@ -1,81 +1,108 @@
-
 {
-  "navigation": {
-    "home": "الرئيسية",
-    "videos": "الفيديوهات",
-    "about": "عن الموقع",
-    "contact": "اتصل بنا",
-    "quiz": "اختبار",
-    "programmingLanguages": "لغات البرمجة"
-  },
-  "home": {
-    "hero": {
-      "title": "تعلم البرمجة باللغة العربية",
-      "subtitle": "دروس عملية وأمثلة واقعية لمطوري الويب",
-      "cta": "ابدأ التعلم"
-    },
-    "featured": {
-      "videos": "فيديوهات مميزة",
-      "projects": "مشاريع مميزة",
-      "viewAll": "عرض الكل"
-    },
-    "cta": {
-      "title": "هل أنت جاهز لتعلم البرمجة باللغة العربية؟",
-      "subtitle": "انضم إلي في رحلة لإتقان تطوير الويب مع دروس عملية وأمثلة واقعية.",
-      "youtube": "اشترك على يوتيوب",
-      "browseVideos": "تصفح الفيديوهات",
-      "takeQuiz": "خذ اختبار",
-      "programmingLanguages": "لغات البرمجة"
+  "admin": {
+    "articles": {
+      "add": "إضافة مقال جديد",
+      "delete": "حذف المقال",
+      "deleteConfirm": "هل أنت متأكد من حذف هذا المقال؟ لا يمكن التراجع عن هذا الإجراء.",
+      "description": "إدارة مقالات لغات البرمجة",
+      "edit": "تعديل المقال",
+      "noArticles": "لم يتم العثور على مقالات",
+      "search": "بحث عن مقالات...",
+      "title": "مقالات البرمجة"
     }
   },
-  "quiz": {
-    "title": "اختبار البرمجة",
-    "description": "اختبر معرفتك البرمجية من خلال أسئلة الاختيار من متعدد.",
-    "selectLanguage": "اختر لغة البرمجة",
-    "chooseLanguage": "اختر لغة",
-    "questionCount": "عدد الأسئلة",
-    "chooseNumber": "اختر عدد",
-    "startQuiz": "ابدأ الاختبار",
-    "question": "سؤال",
-    "of": "من",
-    "restartQuiz": "إعادة الاختبار",
-    "nextQuestion": "السؤال التالي",
-    "finishQuiz": "إنهاء الاختبار",
-    "noQuestions": "لا توجد أسئلة متاحة",
-    "noQuestionsDesc": "لا توجد أسئلة {{language}} متاحة حاليًا.",
-    "limitedQuestions": "فقط {{count}} أسئلة {{language}} متاحة. بدء الاختبار بالأسئلة المتاحة."
+  "articles": {
+    "backToLanguages": "",
+    "fetchError": "",
+    "fetchErrorDescription": "",
+    "libraries": "",
+    "libraryLink": "",
+    "notFound": "",
+    "notFoundDescription": "",
+    "requirements": "",
+    "useCases": ""
   },
-  "programmingLanguages": {
-    "title": "لغات البرمجة",
-    "description": "استكشف لغات البرمجة المختلفة وتعرف على ميزاتها ومتطلباتها واستخداماتها.",
-    "viewMore": "عرض التفاصيل",
-    "requirements": "متطلبات التعلم",
-    "useCases": "الاستخدامات الشائعة",
-    "libraries": "المكتبات والأطر الشهيرة",
-    "backToList": "العودة إلى قائمة اللغات"
+  "copy": {
+    "button": "",
+    "error": "",
+    "errorDescription": "",
+    "success": "",
+    "successDescription": ""
   },
   "footer": {
     "bio": "مطور ويب ومعلم متخصص في إنشاء محتوى برمجة تفاعلي للمجتمع الناطق باللغة العربية.",
+    "github": "جيثب",
     "navigation": "التنقل",
     "resources": "الموارد",
-    "github": "جيثب",
-    "youtube": "يوتيوب",
-    "rights": "جميع الحقوق محفوظة."
+    "rights": "جميع الحقوق محفوظة.",
+    "youtube": "يوتيوب"
+  },
+  "home": {
+    "cta": {
+      "browseVideos": "تصفح الفيديوهات",
+      "programmingLanguages": "لغات البرمجة",
+      "subtitle": "انضم إلي في رحلة لإتقان تطوير الويب مع دروس عملية وأمثلة واقعية.",
+      "takeQuiz": "خذ اختبار",
+      "title": "هل أنت جاهز لتعلم البرمجة باللغة العربية؟",
+      "youtube": "اشترك على يوتيوب"
+    },
+    "featured": {
+      "projects": "مشاريع مميزة",
+      "videos": "فيديوهات مميزة",
+      "viewAll": "عرض الكل"
+    },
+    "hero": {
+      "cta": "ابدأ التعلم",
+      "subtitle": "دروس عملية وأمثلة واقعية لمطوري الويب",
+      "title": "تعلم البرمجة باللغة العربية"
+    }
   },
   "language": {
-    "english": "English",
-    "arabic": "العربية"
+    "arabic": "العربية",
+    "english": "English"
   },
-  "admin": {
-    "articles": {
-      "title": "مقالات البرمجة",
-      "description": "إدارة مقالات لغات البرمجة",
-      "add": "إضافة مقال جديد",
-      "edit": "تعديل المقال",
-      "delete": "حذف المقال",
-      "deleteConfirm": "هل أنت متأكد من حذف هذا المقال؟ لا يمكن التراجع عن هذا الإجراء.",
-      "search": "بحث عن مقالات...",
-      "noArticles": "لم يتم العثور على مقالات"
-    }
+  "navigation": {
+    "about": "عن الموقع",
+    "contact": "اتصل بنا",
+    "home": "الرئيسية",
+    "programmingLanguages": "لغات البرمجة",
+    "quiz": "اختبار",
+    "videos": "الفيديوهات"
+  },
+  "programmingLanguages": {
+    "backToList": "العودة إلى قائمة اللغات",
+    "description": "استكشف لغات البرمجة المختلفة وتعرف على ميزاتها ومتطلباتها واستخداماتها.",
+    "libraries": "المكتبات والأطر الشهيرة",
+    "requirements": "متطلبات التعلم",
+    "title": "لغات البرمجة",
+    "useCases": "الاستخدامات الشائعة",
+    "viewMore": "عرض التفاصيل"
+  },
+  "quiz": {
+    "chooseLanguage": "اختر لغة",
+    "chooseNumber": "اختر عدد",
+    "description": "اختبر معرفتك البرمجية من خلال أسئلة الاختيار من متعدد.",
+    "error": "",
+    "fetchError": "",
+    "fetchLanguagesError": "",
+    "finishQuiz": "إنهاء الاختبار",
+    "limitedQuestions": "فقط {{count}} أسئلة {{language}} متاحة. بدء الاختبار بالأسئلة المتاحة.",
+    "limitedQuestions_zero": "",
+    "limitedQuestions_one": "",
+    "limitedQuestions_two": "",
+    "limitedQuestions_few": "",
+    "limitedQuestions_many": "",
+    "limitedQuestions_other": "",
+    "loading": "",
+    "nextQuestion": "السؤال التالي",
+    "noQuestions": "لا توجد أسئلة متاحة",
+    "noQuestionsDesc": "لا توجد أسئلة {{language}} متاحة حاليًا.",
+    "of": "من",
+    "question": "سؤال",
+    "questionCount": "عدد الأسئلة",
+    "restartQuiz": "إعادة الاختبار",
+    "selectLanguage": "اختر لغة البرمجة",
+    "startQuiz": "ابدأ الاختبار",
+    "title": "اختبار البرمجة"
   }
 }

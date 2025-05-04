@@ -46,10 +46,10 @@ const VideoCard = ({ video }: VideoCardProps) => {
           <h3 className="font-display font-semibold mb-2 line-clamp-2">
             {video.title}
           </h3>
-          <p
+          <p dir="rtl"
             className={`text-sm text-gray-500 ${
               isExpanded ? "" : "line-clamp-5"
-            } cursor-pointer`}
+            } cursor-pointer` }
             onClick={toggleDescription}
           >
             {video.description}
